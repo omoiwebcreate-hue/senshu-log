@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>泉州からのおでかけ日記</title>
+<meta name="description" content="泉南を中心に、カフェ・小さなお店・自然のある場所をめぐりながら、初めて行く人にもわかりやすい形で記録しています。">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cr: #C4713A;
+    --cr-l: #EDD9C8;
+    --cr-p: #FAF3EC;
+    --ink: #2B2520;
+    --ink-m: #6B5E54;
+    --ink-s: #A89C94;
+    --bg: #FDFAF6;
+    --bg2: #F7F2EB;
+    --bg3: #EEE7DC;
+    --bd: #DDD4C6;
+    --serif: 'Noto Serif JP', serif;
+    --sans: 'Zen Kaku Gothic New', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: var(--bg2);
+    padding: 64px 28px 56px;
+    text-align: center;
+    border-bottom: 1px solid var(--bd);
+  }
+  .hero-tag {
+    display: block;
+    font-size: 10.5px;
+    letter-spacing: .2em;
+    color: var(--cr);
+    font-weight: 500;
+    margin-bottom: 22px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 400;
+    letter-spacing: .06em;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-bottom: 26px;
+  }
+  .hero-lead {
+    font-size: 13.5px;
+    color: var(--ink-m);
+    line-height: 2.1;
+    margin-bottom: 18px;
+  }
+  .hero-note {
+    font-size: 12.5px;
+    color: var(--ink-s);
+    line-height: 2;
+    margin-bottom: 40px;
+    padding: 14px 18px;
+    background: var(--bg);
+    border-left: 2px solid var(--cr-l);
+    text-align: left;
+    border-radius: 0 4px 4px 0;
+  }
+  .btns {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    align-items: center;
+  }
+  .btn-fill {
+    display: block;
+    width: 210px;
+    padding: 12px 0;
+    background: var(--cr);
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: .07em;
+    font-weight: 500;
+    border-radius: 2px;
+    transition: background .2s;
+  }
+  .btn-fill:hover { background: #a85d2e; }
+  .btn-out {
+    display: block;
+    width: 210px;
+    padding: 11px 0;
+    background: transparent;
+    color: var(--ink-m);
+    text-align: center;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: .05em;
+    border: 1px solid var(--bd);
+    border-radius: 2px;
+    transition: border-color .2s, color .2s;
+  }
+  .btn-out:hover { border-color: var(--cr); color: var(--cr); }
+
+  /* ─── SECTIONS ─── */
+  .sec { padding: 52px 28px; }
+  .sec-alt { background: var(--bg2); }
+  .sec-alt2 { background: var(--bg3); }
+
+  .lbl {
+    display: block;
+    font-size: 10px;
+    letter-spacing: .22em;
+    color: var(--cr);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .sec h2 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: .04em;
+    color: var(--ink);
+    line-height: 1.55;
+    margin-bottom: 6px;
+  }
+  .rule {
+    width: 28px;
+    height: 1px;
+    background: var(--cr);
+    margin: 18px 0 24px;
+  }
+
+  .body-txt { font-size: 13.5px; color: var(--ink-m); line-height: 2.05; }
+  .body-txt p + p { margin-top: 14px; }
+
+  .btn-ghost {
+    display: inline-block;
+    padding: 10px 22px;
+    background: transparent;
+    color: var(--ink-m);
+    text-decoration: none;
+    font-size: 12.5px;
+    letter-spacing: .05em;
+    border: 1px solid var(--bd);
+    border-radius: 2px;
+    margin-top: 26px;
+    transition: border-color .2s, color .2s;
+  }
+  .btn-ghost:hover { border-color: var(--cr); color: var(--cr); }
+
+  /* photo placeholder */
+  .photo-slot {
+    background: var(--bg3);
+    border: 1px dashed var(--bd);
+    border-radius: 4px;
+    height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6px;
+    margin: 22px 0;
+    color: var(--ink-s);
+    font-size: 11px;
+    letter-spacing: .12em;
+  }
+
+  /* tag grid */
+  .tag-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--bd);
+    border: 1px solid var(--bd);
+    margin: 26px 0 30px;
+  }
+  .tag-item {
+    background: var(--bg);
+    padding: 12px 14px;
+    font-size: 12.5px;
+    color: var(--ink-m);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--cr);
+    flex-shrink: 0;
+  }
+
+  /* note card */
+  .note-card {
+    background: var(--cr-p);
+    border-left: 2px solid var(--cr);
+    padding: 14px 16px;
+    margin: 22px 0 26px;
+    border-radius: 0 4px 4px 0;
+  }
+  .note-card p { font-size: 12.5px; color: var(--ink-m); line-height: 2; }
+
+  /* quote list */
+  .qs { margin: 22px 0 26px; border-top: 1px solid var(--bd); }
+  .q-item {
+    padding: 13px 0;
+    border-bottom: 1px solid var(--bd);
+    font-size: 13px;
+    color: var(--ink-m);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .q-mark {
+    color: var(--cr);
+    font-size: 11px;
+    font-family: var(--serif);
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  /* web btns */
+  .web-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 26px;
+  }
+  .web-btns .btn-fill,
+  .web-btns .btn-out {
+    width: auto;
+    padding: 11px 24px;
+    text-align: center;
+  }
+
+  /* cards */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin: 26px 0 8px;
+  }
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--bd);
+    border-radius: 4px;
+    padding: 18px 14px;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-lbl {
+    display: block;
+    font-size: 10px;
+    letter-spacing: .14em;
+    color: var(--cr);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .card-ttl {
+    font-family: var(--serif);
+    font-size: 13.5px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.55;
+  }
+  .card-txt {
+    font-size: 12px;
+    color: var(--ink-s);
+    line-height: 1.9;
+    margin-bottom: 16px;
+    flex: 1;
+  }
+  .card-btn {
+    display: block;
+    padding: 8px 0;
+    text-align: center;
+    background: transparent;
+    color: var(--ink-m);
+    text-decoration: none;
+    font-size: 11.5px;
+    border: 1px solid var(--bd);
+    border-radius: 2px;
+    transition: border-color .2s, color .2s;
+  }
+  .card-btn:hover { border-color: var(--cr); color: var(--cr); }
+
+  /* contact */
+  .contact-sec {
+    background: var(--ink);
+    padding: 56px 28px;
+  }
+  .contact-sec .lbl { color: var(--cr-l); }
+  .contact-sec h2 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: .04em;
+    color: var(--bg);
+    line-height: 1.55;
+  }
+  .contact-sec .rule { background: var(--cr-l); }
+  .contact-sec .body-txt { color: rgba(253,250,246,.62); }
+  .contact-sec .body-txt p + p { margin-top: 12px; }
+  .contact-sec .btn-fill {
+    width: auto;
+    padding: 12px 32px;
+    margin-top: 30px;
+    display: inline-block;
+  }
+
+  /* footer */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,.07);
+    padding: 22px 28px;
+    text-align: center;
+  }
+  footer p {
+    font-size: 11px;
+    color: rgba(253,250,246,.22);
+    letter-spacing: .1em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ① HERO -->
+<section class="hero">
+  <span class="hero-tag">Sennan / Senshu — local outing diary</span>
+  <h1>泉州からの<br>おでかけ日記</h1>
+  <p class="hero-lead">
+    泉南を中心に、カフェ・小さなお店・自然のある場所をめぐりながら、<br>
+    初めて行く人にもわかりやすい形で記録しています。<br><br>
+    ときどき、和歌山・奈良のおでかけも。
+  </p>
+  <p class="hero-note">
+    休日にふらっと行きたくなる場所や、小さなお店の雰囲気が伝わるように、写真と言葉で丁寧に残していく地域のおでかけ記録です。
+  </p>
+  <div class="btns">
+    <a href="https://www.instagram.com/senshu_log/" target="_blank" rel="noopener" class="btn-fill">Instagramを見る</a>
+    <a href="#contact" class="btn-out">DMで連絡する</a>
+  </div>
+</section>
+
+<!-- ② ABOUT -->
+<section class="sec" id="about">
+  <span class="lbl">about</span>
+  <h2>このアカウントについて</h2>
+  <div class="rule"></div>
+
+  <img src="hero.jpg" alt="泉南の海岸風景" style="width:100%;height:220px;object-fit:cover;border-radius:4px;display:block;margin:22px 0;">
+
+  <div class="body-txt">
+    <p>「泉州からのおでかけ日記」は、泉南を中心に、カフェ・小さなお店・自然のある場所を紹介する地域のおでかけ記録です。</p>
+    <p>グルメの評価やランキングではなく、初めて行く人が安心できるように、雰囲気・場所・過ごし方が伝わる投稿を大切にしています。</p>
+    <p>お店の空気感、席の雰囲気、メニューの見やすさ、行く前に知っておきたいことなどを、できるだけやさしい言葉で記録していきます。</p>
+  </div>
+  <a href="https://www.instagram.com/senshu_log/" target="_blank" rel="noopener" class="btn-ghost">投稿を見る</a>
+</section>
+
+<!-- ③ TOPICS -->
+<section class="sec sec-alt" id="topics">
+  <span class="lbl">topics</span>
+  <h2>紹介しているもの</h2>
+  <div class="rule"></div>
+  <div class="body-txt">
+    <p>カフェだけでなく、ランチ、スイーツ、小さなお店、自然のある場所など、休日にふらっと行きたくなる場所を記録しています。</p>
+    <p>泉南・泉州を中心に、ときどき和歌山・奈良にも足を運びます。</p>
+    <p>「行ってみたい」と思える雰囲気や、初めての人が迷わず行けるような情報を大切にしています。</p>
+  </div>
+  <div class="tag-grid">
+    <div class="tag-item"><span class="dot"></span>泉南・泉州のカフェ</div>
+    <div class="tag-item"><span class="dot"></span>小さなお店</div>
+    <div class="tag-item"><span class="dot"></span>ランチやスイーツ</div>
+    <div class="tag-item"><span class="dot"></span>自然のある場所</div>
+    <div class="tag-item"><span class="dot"></span>休日に行きたい場所</div>
+    <div class="tag-item"><span class="dot"></span>和歌山・奈良</div>
+  </div>
+  <a href="https://www.instagram.com/senshu_log/" target="_blank" rel="noopener" class="btn-ghost">おでかけ投稿を見る</a>
+</section>
+
+<!-- ④ FOR STORES -->
+<section class="sec" id="store">
+  <span class="lbl">for stores</span>
+  <h2>お店の方へ</h2>
+  <div class="rule"></div>
+  <div class="body-txt">
+    <p>お店の雰囲気や魅力が、初めての方にも伝わるように、写真と言葉で丁寧に紹介しています。</p>
+    <p>掲載内容について気になる点がある場合や、表記の修正をご希望の場合は、InstagramのDMからお気軽にご連絡ください。</p>
+  </div>
+  <div class="note-card">
+    <p>できる範囲にはなりますが、お店の方にとっても安心して見ていただける発信を心がけています。掲載内容についてのご連絡は、いつでもお気軽にどうぞ。</p>
+  </div>
+  <a href="https://www.instagram.com/senshu_log/" target="_blank" rel="noopener" class="btn-ghost">DMで連絡する</a>
+</section>
+
+<!-- ⑤ WEB WORKS -->
+<section class="sec sec-alt2" id="web">
+  <span class="lbl">web works</span>
+  <h2>Webでお店の魅力を<br>伝えるお手伝いも<br>しています</h2>
+  <div class="rule"></div>
+  <div class="body-txt">
+    <p>Instagramでは流れてしまいやすい営業時間、メニュー、駐車場、予約方法、お店の雰囲気。そういった情報を、初めてのお客様にもわかりやすく整理するために、小さなお店向けのWeb制作も行っています。</p>
+    <p>無理な営業ではなく、お店の魅力が必要な人に届きやすくなるように、情報を整理して伝えることを大切にしています。</p>
+  </div>
+  <div class="qs">
+    <div class="q-item"><span class="q-mark">—</span><span>「お店の情報をわかりやすくまとめたい」</span></div>
+    <div class="q-item"><span class="q-mark">—</span><span>「Instagramだけでは伝えきれないことがある」</span></div>
+    <div class="q-item"><span class="q-mark">—</span><span>「初めて来る人に、場所や雰囲気を伝えたい」</span></div>
+  </div>
+  <p class="body-txt">そんな時に、Webページという形で整えるお手伝いをしています。</p>
+  <div class="web-btns">
+    <a href="https://omoiwebcreate-hue.github.io/coming-soon.html" target="_blank" rel="noopener" class="btn-fill">Omoi Web Worksを見る</a>
+    <a href="https://www.instagram.com/omoi_webworks/" target="_blank" rel="noopener" class="btn-out">Web制作について見る</a>
+  </div>
+</section>
+
+<!-- ⑥ CHANNELS -->
+<section class="sec sec-alt" id="other">
+  <span class="lbl">channels</span>
+  <h2>他の発信はこちら</h2>
+  <div class="rule"></div>
+  <p class="body-txt">地域のおでかけ記録と、小さなお店向けのWeb制作を、それぞれの場所で発信しています。</p>
+  <div class="cards">
+    <div class="card">
+      <span class="card-lbl">Instagram</span>
+      <p class="card-ttl">泉州からの<br>おでかけ日記</p>
+      <p class="card-txt">泉南を中心に、カフェ・小さなお店・自然のある場所を紹介する地域のおでかけ記録です。</p>
+      <a href="https://www.instagram.com/senshu_log/" target="_blank" rel="noopener" class="card-btn">日記を見る</a>
+    </div>
+    <div class="card">
+      <span class="card-lbl">Web Works</span>
+      <p class="card-ttl">Omoi<br>Web Works</p>
+      <p class="card-txt">小さなお店向けに、Webサイト制作やSNS発信の整理を行っています。</p>
+      <a href="https://www.instagram.com/omoi_webworks/" target="_blank" rel="noopener" class="card-btn">詳しく見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- ⑦ CONTACT -->
+<section class="contact-sec" id="contact">
+  <span class="lbl">contact</span>
+  <h2>お問い合わせ</h2>
+  <div class="rule"></div>
+  <div class="body-txt">
+    <p>掲載内容について気になる点がある場合や、Web制作について少し聞いてみたい場合は、InstagramのDMからご連絡ください。</p>
+    <p>無理な営業はしていませんので、気になることがあればお気軽にどうぞ。</p>
+  </div>
+  <a href="https://www.instagram.com/senshu_log/" target="_blank" rel="noopener" class="btn-fill">Instagramで連絡する</a>
+</section>
+
+<footer>
+  <p>© 2026 omoi — senshu_log</p>
+</footer>
+
+</body>
+</html>
